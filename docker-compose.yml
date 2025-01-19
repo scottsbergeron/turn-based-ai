@@ -1,0 +1,30 @@
+services:
+  build-windows:
+    build:
+      context: .
+      args:
+        RUNTIME: win-x64
+    volumes:
+      - ./src:/app/src:ro
+      - ./publish/windows:/app/out
+    user: root
+
+  build-mac:
+    build:
+      context: .
+      args:
+        RUNTIME: osx-x64
+    volumes:
+      - ./src:/app/src:ro
+      - ./publish/mac:/app/out
+    user: root
+
+  build-linux:
+    build:
+      context: .
+      args:
+        RUNTIME: linux-x64
+    volumes:
+      - ./src:/app/src:ro
+      - ./publish/linux:/app/out
+    user: root
