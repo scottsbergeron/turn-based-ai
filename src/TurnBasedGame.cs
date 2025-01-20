@@ -16,7 +16,15 @@ namespace TurnBasedGame
             new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-            _battle = new Battle(new PlainsLevel());
+
+            var playerTeam = new Team("Player", true);
+            var enemyTeam = new Team("Enemy", false);
+            
+            _battle = new Battle(
+                new PlainsLevel(),
+                playerTeam,
+                enemyTeam
+            );
         }
 
         protected override void Initialize()

@@ -6,10 +6,12 @@ using TurnBasedGame.Input;
 
 namespace TurnBasedGame.Models
 {
-    public class Battle(ILevel level)
+    public class Battle(ILevel level, Team playerTeam, Team enemyTeam)
     {
         private readonly ILevel _level = level;
-        private readonly InputHandler _inputHandler = new InputHandler();
+        private readonly Team _playerTeam = playerTeam;
+        private readonly Team _enemyTeam = enemyTeam;
+        private readonly InputHandler _inputHandler = new();
         private HexRenderer _renderer = null!;
         
         private const float CAMERA_MOVE_SPEED = 500f;
@@ -68,6 +70,12 @@ namespace TurnBasedGame.Models
 
             // Update camera position
             _renderer.Camera.Update(deltaTime);
+
+            // Update units
+            foreach (var unit in _playerTeam.Units)
+                unit.Update(gameTime);
+            foreach (var unit in _enemyTeam.Units)
+                unit.Update(gameTime);
             
             _level.Update(gameTime);
         }

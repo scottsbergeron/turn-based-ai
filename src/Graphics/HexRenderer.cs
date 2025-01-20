@@ -13,10 +13,10 @@ namespace TurnBasedGame.Graphics
         private Camera2D _camera;
         
         // Colors for different terrain types
-        private static readonly Color PlainsColor = new Color(152, 251, 152); // Light green
-        private static readonly Color ForestColor = new Color(34, 139, 34);   // Dark green
-        private static readonly Color MountainColor = new Color(139, 137, 137); // Gray
-        private static readonly Color WaterColor = new Color(65, 105, 225);   // Blue
+        private static readonly Color PlainsColor = new(152, 251, 152); // Light green
+        private static readonly Color ForestColor = new(34, 139, 34);   // Dark green
+        private static readonly Color MountainColor = new(139, 137, 137); // Gray
+        private static readonly Color WaterColor = new(65, 105, 225);   // Blue
 
         public Camera2D Camera => _camera;
 
