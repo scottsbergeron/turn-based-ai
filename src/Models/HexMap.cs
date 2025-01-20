@@ -7,10 +7,14 @@ namespace TurnBasedGame.Models
     {
         private Dictionary<(int Q, int R), HexTile> _tiles;
         public IReadOnlyDictionary<(int Q, int R), HexTile> Tiles => _tiles;
+        public int Width { get; }
+        public int Height { get; }
 
         public HexMap(int radius)
         {
-            _tiles = new Dictionary<(int Q, int R), HexTile>();
+            Width = radius * 2 + 1;
+            Height = radius * 2 + 1;
+            _tiles = [];
             GenerateMap(radius);
             ConnectNeighbors();
         }

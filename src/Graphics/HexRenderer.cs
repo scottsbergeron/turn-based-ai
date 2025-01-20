@@ -7,9 +7,9 @@ namespace TurnBasedGame.Graphics
 {
     public class HexRenderer
     {
+        public const float HEX_SIZE = 40f;
         private readonly GraphicsDevice _graphicsDevice;
         private readonly BasicEffect _basicEffect;
-        private const float HEX_SIZE = 40f; // Size of the hex from center to corner
         private Camera2D _camera;
         
         // Colors for different terrain types

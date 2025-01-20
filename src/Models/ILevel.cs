@@ -1,5 +1,4 @@
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace TurnBasedGame.Models
 {
@@ -7,8 +6,7 @@ namespace TurnBasedGame.Models
     {
         HexMap Map { get; }
         string Name { get; }
-        void Initialize(GraphicsDevice graphicsDevice);
+        void Initialize();
         void Update(GameTime gameTime);
-        void Draw(SpriteBatch spriteBatch);
     }
 }

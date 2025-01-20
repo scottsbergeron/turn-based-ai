@@ -12,7 +12,7 @@ namespace TurnBasedGame.Input
         public InputHandler()
         {
             _inputState = new InputState();
-            _activeActions = new Dictionary<GameAction, Vector2>();
+            _activeActions = [];
         }
 
         public void Update()
