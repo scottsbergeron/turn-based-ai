@@ -13,12 +13,31 @@ namespace TurnBasedGame.Models.Levels
             Map = new HexMap(5);
         }
 
-        public void Initialize()
+        public void Initialize(Team playerTeam, Team enemyTeam)
         {
+            // Recreate map with extra rows for spawn areas
+            int baseRadius = 5;
+            int extraRows = Math.Max(playerTeam.Units.Count, enemyTeam.Units.Count);
+            Map = new HexMap(baseRadius + extraRows);
+
             // Configure the plains level terrain with some variety
-            Random random = new Random();
+            Random random = new();
             foreach (var tile in Map.Tiles.Values)
             {
+                // Player spawn area (bottom of map)
+                if (tile.R >= Map.Height/2 - playerTeam.Units.Count)
+                {
+                    tile.Terrain = TerrainType.Plains;
+                    continue;
+                }
+                
+                // Enemy spawn area (top of map)
+                if (tile.R <= -Map.Height/2 + enemyTeam.Units.Count)
+                {
+                    tile.Terrain = TerrainType.Plains;
+                    continue;
+                }
+
                 var roll = random.NextDouble();
                 tile.Terrain = roll switch
                 {

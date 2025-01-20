@@ -11,6 +11,7 @@ namespace TurnBasedGame.Models
         private readonly ILevel _level = level;
         private readonly Team _playerTeam = playerTeam;
         private readonly Team _enemyTeam = enemyTeam;
+        private readonly Turn _turn = new([playerTeam, enemyTeam]);
         private readonly InputHandler _inputHandler = new();
         private HexRenderer _renderer = null!;
         
@@ -21,7 +22,7 @@ namespace TurnBasedGame.Models
         public void Initialize(GraphicsDevice graphicsDevice)
         {
             _renderer = new HexRenderer(graphicsDevice);
-            _level.Initialize();
+            _level.Initialize(_playerTeam, _enemyTeam);
 
             // Calculate map bounds based on hex grid size
             float mapWidth = _level.Map.Width * HexRenderer.HEX_SIZE * MathF.Sqrt(3);
@@ -29,7 +30,7 @@ namespace TurnBasedGame.Models
             
             // Add some padding around the edges
             const float PADDING = 100f;
-            Rectangle bounds = new Rectangle(
+            Rectangle bounds = new(
                 (int)(-mapWidth/2 - PADDING),
                 (int)(-mapHeight/2 - PADDING),
                 (int)(mapWidth + PADDING * 2),
@@ -72,9 +73,7 @@ namespace TurnBasedGame.Models
             _renderer.Camera.Update(deltaTime);
 
             // Update units
-            foreach (var unit in _playerTeam.Units)
-                unit.Update(gameTime);
-            foreach (var unit in _enemyTeam.Units)
+            foreach (var unit in _turn.ActiveTeam.Units)
                 unit.Update(gameTime);
             
             _level.Update(gameTime);
@@ -85,4 +84,4 @@ namespace TurnBasedGame.Models
             _renderer.DrawHexMap(spriteBatch, _level.Map);
         }
     }
-} 
+}

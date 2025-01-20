@@ -6,7 +6,7 @@ namespace TurnBasedGame.Models
     {
         HexMap Map { get; }
         string Name { get; }
-        void Initialize();
+        void Initialize(Team playerTeam, Team enemyTeam);
         void Update(GameTime gameTime);
     }
 }
